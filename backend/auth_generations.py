@@ -1,10 +1,6 @@
 from abc import abstractmethod, ABC
 
 import bcrypt
-import jwt
-
-from custom_types import JWTTokenType
-from pydantic_models import JWTPayload
 
 class PasswordServiceAbstract(ABC):
     @abstractmethod
