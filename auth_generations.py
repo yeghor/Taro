@@ -1,6 +1,8 @@
 from abc import abstractmethod, ABC
 
 import bcrypt
+import re
+import pytest
 
 class PasswordServiceAbstract(ABC):
     @abstractmethod
@@ -29,8 +31,30 @@ class PasswordService(PasswordServiceAbstract):
         except ValueError:
             return False
 
-        """
-        entered_password = entered_password.encode('utf-8')
-        res = bcrypt.checkpw(Bytes, hashed_password)
-        return res
-        """
+    """
+    class ValidationError(Exception):
+    pass
+
+
+class ValidationService:
+
+    pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$'
+
+    def validate_password(self, entered_password: str, hashed_password: str) -> bool:
+        pattern_to_use = self.pattern
+        if not re.match(pattern_to_use, entered_password):
+            raise ValidationError()
+        return True
+
+    def test_validation_serv(self):
+
+        try:
+            self.validate_password('', '')
+        except ValidationError:
+            pytest.fail('Try with new password')
+            
+            with pytest.raises(ValidationError):
+            serv.validate_password('', '')
+
+        assert serv.validate_password('', pattern'') == True
+    """
