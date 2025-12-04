@@ -1,5 +1,5 @@
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
-from backend.types import TaroTypes
+from TaroMLP.backend.project_types import TaroTypes
 
 class Base(DeclarativeBase):
     pass

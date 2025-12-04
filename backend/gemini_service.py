@@ -1,12 +1,76 @@
+from fastapi import HTTPException
+from google import genai
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
+from os import getenv
+from typing import List
 
-from backend.types import TaroTypes
+load_dotenv()
 
-class AIService(ABC):
+from project_types import TaroTypes, TaroData
+from pydantic_models import Card
+
+BASE_PROMPT = """
+You are an expert tarot reader. Give a clear, direct, practical prediction without being vague or overly mystical.
+
+Task:
+- Combine the meanings of all three cards into a coherent, realistic prediction.
+- Use the context of the user’s question.
+- Stay grounded: no fate, destiny, or supernatural claims.
+- Focus on psychology, patterns, likely outcomes, and actionable insights.
+- Keep the reading structured:
+  1. What the cards reveal about the current situation.
+  2. The dynamics, challenges, or influences.
+  3. The most likely outcome if nothing changes.
+  4. Practical advice the user can apply.
+
+Tone:
+- Calm, thoughtful, analytical.
+- Don’t sugarcoat. Be honest and practical.
+- Avoid generic sayings or clichés.
+"""
+
+taro_data: TaroData = {
+    "love": "Reveals emotional dynamics, intentions, hidden tensions and potential outcomes in relationships. Focuses on how two people align, what blocks them, and where the connection is heading.",
+    "future": "Gives a snapshot of likely upcoming events if things continue as they are. Not fate, but a probability curve shaped by your current choices and momentum.",
+    "career": "Shows work-related trends: opportunities, risks, motivation, burnout markers and how your actions might influence professional growth or stagnation.",
+    "impression": "Reflects how someone currently perceives you — your energy, your strengths, your weaknesses, and the overall vibe you project in their eyes."
+}
+
+
+class AIServiceABC(ABC):
+    @staticmethod
+    def _create_full_prompt(predict_type: TaroTypes, user_prompt: str, cards: List[Card]) -> str:
+        """Constructs full prompt to AI"""
+
+        cards_desc = f"CARDS:\n"
+        for card in cards:
+            cards_desc += f"{card.name} - {card.description}\n"
+    
+        user_prompt_ready = f"USER PROMPT: {user_prompt}"
+
+        predict_type = f"PREDICTION TYPE: {predict_type} - {taro_data[predict_type]}"
+
+        return f"{BASE_PROMPT} \n\n {predict_type} \n {cards_desc} \n {user_prompt_ready}"
+
+
     @abstractmethod
-    def get_prediction_desc(predict_type: TaroTypes, prompt: str, cards) -> str:
+    def make_prediction(self, predict_type: TaroTypes, prompt: str, cards: List[Card]) -> str:
         """Makes request to AI API to get description of prediction"""
 
-class GeminiService(AIService):
-    def get_prediction_desc(predict_type, prompt, cards):
-        pass
+class GeminiService(AIServiceABC):
+    def __init__(self):
+        # The client gets the API key from the environment variable `GEMINI_API_KEY`.
+        self._client = genai.Client(api_key=getenv("GEMINI_API_KEY"))
+
+    def make_prediction(self, predict_type, prompt, cards):
+        prepared_prompt = self._create_full_prompt(predict_type, prompt, cards)
+        try:
+            print(prepared_prompt)
+            response = self._client.models.generate_content(
+                model="gemini-2.5-flash", contents=prepared_prompt
+            )
+
+            return response.text
+        except Exception:
+            raise HTTPException(status_code=500, detail="AI Client doesn't respond")
