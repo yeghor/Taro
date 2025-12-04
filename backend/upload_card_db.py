@@ -1,4 +1,4 @@
-from backend.types import TaroType, TaroData
+from project_types import TaroType, TaroData
 
 taro_data: TaroData = {
     "love": "Reveals emotional dynamics, intentions, hidden tensions and potential outcomes in relationships. Focuses on how two people align, what blocks them, and where the connection is heading.",

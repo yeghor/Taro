@@ -1,4 +1,5 @@
-from typing import Literal, List, Dict
+from typing import Literal, Dict
 
 TaroTypes = Literal["love", "future", "career", "impression"]
 TaroData = Dict[Literal["love", "future", "career", "impression"], str]
+
