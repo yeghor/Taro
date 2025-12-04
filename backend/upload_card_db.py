@@ -6,5 +6,3 @@ taro_data: TaroData = {
     "career": "Shows work-related trends: opportunities, risks, motivation, burnout markers and how your actions might influence professional growth or stagnation.",
     "impression": "Reflects how someone currently perceives you — your energy, your strengths, your weaknesses, and the overall vibe you project in their eyes."
 }
-
-
