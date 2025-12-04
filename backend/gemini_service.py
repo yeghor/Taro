@@ -1,2 +1,2 @@
-class GeminiService:
+class GeminiService: # прописать какие-то методы 
     pass
