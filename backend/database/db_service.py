@@ -5,6 +5,10 @@ from sqlalchemy.orm import Session
 
 class DBServiceABC(ABC):
     @abstractmethod
+    def __init__(self, session: Session):
+        """Create instance"""
+
+    @abstractmethod
     def close(self) -> None:
         """Closes session, call required, preferably in finally block"""
 
