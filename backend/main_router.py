@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
 from pydantic_models import Schema
+from main_service import MainService
 
 from database.db_connect import get_sesstion_depends
 
@@ -15,6 +16,13 @@ def predict(
     session: Session = Depends(get_sesstion_depends)
 ):
     """
-    1. Create main service class instance (क्लास का एक इंस्टेंस बनाएँ) 
-    2. Call and return method in service that creates prediction
+    1. Creates a prediction using the specified tarot type and prompt (क्लास का एक इंस्टेंस बनाएँ). 
+    2. The prediction function should be called within a try-finally block,
+        where the service's close() method is called in the finally block.
     """
+    try:
+        new_main_service = MainService(session, tarot_type, prompt)
+        return new_main_service.predict()
+    finally:
+        new_main_servise.close()
+        
