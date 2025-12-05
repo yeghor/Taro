@@ -36,7 +36,7 @@ const MainPage = () => {
         {["love", "future", "career", "impression"].map((type) => (
             <div
                 key={type}
-                onClick={() => changeType(type)}
+                onClick={() => changeType(type as PredictionTypes)}
                 className={`
                     cursor-pointer py-3 px-4 rounded-xl text-center font-semibold transition-all duration-200
                     ${predType === type

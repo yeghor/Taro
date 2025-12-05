@@ -78,10 +78,9 @@ class GeminiService(AIServiceABC):
 
     def make_prediction(self, predict_type, prompt, cards):
         prepared_prompt = self._create_full_prompt(predict_type, prompt, cards)
-        # try:
-        print(prepared_prompt)
-        response = self._client.generate_content(contents=prepared_prompt)
-
-        return response.text
-        # except Exception:
-        #     raise HTTPException(status_code=500, detail="AI Client doesn't respond")
+        try:
+            print(prepared_prompt)
+            response = self._client.generate_content(contents=prepared_prompt)
+            return response.text
+        except Exception:
+             raise HTTPException(status_code=500, detail="AI Client doesn't respond")
