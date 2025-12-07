@@ -17,6 +17,8 @@ On the frontend user chooses prediction type and enters prompt. When user clicks
 - SQLalcemy
 - google.genai
 
+As database to store all the tarot cards we used SQLite.
+
 ## Usage
 
 > Requires Python 3.12+, npm or yarn
@@ -24,6 +26,7 @@ On the frontend user chooses prediction type and enters prompt. When user clicks
 Clone the repository:
 ```bash
 git clone https://github.com/yeghor/Tarot.git
+cd Tarot
 ```
 
 Create `.env` file in `backend` directory and fill it with your **Gemini API Key**:
@@ -49,5 +52,5 @@ uvicorn main:app --reload
 
 ```bash
 cd frontend
-npm run dev
+npm run dev # yarn dev
 ```
