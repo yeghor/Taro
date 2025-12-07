@@ -4,3 +4,8 @@ uvicorn==0.35.0
 sqlalchemy==2.0.41
 google==3.0.0
 dotenv==0.9.9
+<<<<<<< HEAD
+=======
+httpx==0.28.1
+openai==1.66.5
+>>>>>>> 4ca32b3b7865e1a099ecb445fba6584703eda240
