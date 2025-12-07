@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import ReactDOM from 'react-dom/client';
+
 import { type PredictionTypes } from "./project_types";
 import { fetchPredict } from "./fetching/fetching";
+import './index.css'; 
 
 const MainPage = () => {
     
@@ -25,7 +28,6 @@ const MainPage = () => {
     };
 
     return(
-
 <div className="max-w-md mx-auto mt-20 p-8 bg-white rounded-3xl shadow-[0_20px_50px_rgba(139,92,246,0.15)]">
     
     <div className="text-center mb-8">
@@ -36,7 +38,7 @@ const MainPage = () => {
     <div className="mb-6">
         <input
             onChange={(e) => setPrompt(e.target.value)}
-            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-4 text-slate-700 placeholder-slate-400 focus:outline-none focus:border-violet-400 focus:bg-white transition-colors"
+            className="w-full bg-slate-50 border-2 border-slate-200 rounded-2xl px-5 py-4 text-slate-700 placeholder-slate-400 focus:outline-none focus:border-violet-400 focus:bg-white transition-colors"
             type="text"
             placeholder="What exactly you want to predict?"
         />
@@ -98,4 +100,5 @@ export default MainPage;
             <div onClick={() => makePrediction()}>
                 <button className="bg-violet-500 hover:bg-violet-300 transition-all hover:scale-105 m-8 p-2">Make a Prediction!</button>
             </div>
-        </div>*/
+        </div>
+        */
