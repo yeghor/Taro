@@ -1,4 +1,4 @@
-import MarkdownIt from "markdown-it"
+import MarkdownIt from "markdown-it";
 
 const Markdown = (mdstring = "") => {
   const md = new MarkdownIt(),

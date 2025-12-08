@@ -32,7 +32,7 @@ const MainPage = () => {
     };
 
     return(
-<div className="max-w-md mx-auto mt-20 p-8 bg-white rounded-3xl shadow-[0_20px_50px_rgba(139,92,246,0.15)]">
+<div className="py-8 px-16 mx-auto mt-20 p-8 bg-white rounded-3xl shadow-[0_20px_50px_rgba(139,92,246,0.15)]">
     
     <div className="text-center mb-8">
         <p className="text-3xl font-bold text-slate-800">Tarot Prediction</p>

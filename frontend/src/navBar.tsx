@@ -38,7 +38,7 @@ const NavbarComp = () => {
 
                     <nav className="hidden md:flex items-center gap-8">
                         <ul className="flex gap-6 list-none">
-                            {['Home', 'Cards', 'About us', 'GitHub'].map((item) => (
+                            {['Home', 'All Cards', 'About us', 'GitHub'].map((item) => (
                                 <li key={item}>
                                     <a 
                                         href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`} 
@@ -77,9 +77,7 @@ const NavbarComp = () => {
                             </a>
                         </li>
                     ))}
-                    <button className="mt-4 px-8 py-3 bg-violet-600 text-white rounded-full text-lg shadow-xl hover:bg-purple-700 transition-all">
-                        Sign Up
-                    </button>
+                        <Switcher/>
                 </ul>
             </div>
         </header>
