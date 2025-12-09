@@ -1,6 +1,9 @@
 # Tarot
 Tarot prediction web application.
 
+<img width="2609" height="1721" alt="image" style="border-radius:50%" src="https://github.com/user-attachments/assets/be81b77f-51a5-45ed-a9ff-57acb1e1b659" />
+
+
 ## How it works?
 
 On the frontend user chooses prediction type and enters prompt. When user clicks submit button, backend receives request, chooses random tarot cards and making request to AI API to generate prediction based on the type, user's prompt and tarot cards.
