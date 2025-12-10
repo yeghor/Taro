@@ -1,4 +1,5 @@
-export let localization: "ENG" | "UK" = "ENG" 
+export type LocalizationOptions = "ENG" | "UA"
+export let localization: LocalizationOptions = "ENG" // TODO: Store in Cookies
 
 export interface MappedLocalization {
     predictionTitle: string

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { type PredictionTypes } from "./project_types";
 import { fetchPredict, MEDIA_URL as mediaURLMaker } from "./fetching/fetching";
@@ -9,12 +9,17 @@ import Markdown from "./mardown";
 
 import {type MappedLocalization } from "./localization/localization";
 
-interface MainPageProps {
-    mappedLocalization: MappedLocalization
-}
+import { LocalizationContext, type LanguageStateSwitcherType } from "./localizationWrapper";
+import { mapLocalization } from "./localization/localizationMapper";
 
 const MainPage = () => {
     const [ loading, setLoading ] = useState(false);
+
+    let localization = useContext(LocalizationContext)
+
+    if (!localization) {
+        localization = mapLocalization("ENG")
+    }
 
     const [ predType, setPredType ] = useState<PredictionTypes>("love");
     const [ prompt, setPrompt ] = useState("");

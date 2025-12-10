@@ -2,6 +2,6 @@ import { type MappedLocalization, localizationObj } from "./localization"
 
 type Language = "ENG" | "UA"
 
-export const mapLocalization = (lang: Language) => {
+export const mapLocalization = (lang: Language): MappedLocalization => {
 
 }

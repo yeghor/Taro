@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
+import type { LanguageStateSwitcherType } from './localizationWrapper';
 
-const Switcher = () => {
-  const [isUkr, setIsUkr] = useState(true);
+interface LangSwitcherProps {
+    switchState: LanguageStateSwitcherType | null;
+}
 
+const Switcher = (props: LangSwitcherProps) => {
   const toggleLanguage = () => {
-    setIsUkr(!isUkr);
+    if (!props.switchState) {
+        return;
+    }
+
+    props.switchState((prevState) => {
+        if (prevState == "ENG") {
+            return "UA";
+        } else {
+            return "ENG";
+        }
+    });
   };
 
   return (
@@ -24,7 +37,7 @@ const Switcher = () => {
         className={`
           h-6 w-7 bg-white rounded-full shadow-md flex items-center justify-center 
           text-violet-600 font-bold text-sm transform transition-transform duration-300
-          ${isUkr ? 'translate-x-0' : 'translate-x-11'}
+          ${ ? 'translate-x-0' : 'translate-x-11'}
         `}
       >
         {isUkr ? 'UA' : 'EN'}
