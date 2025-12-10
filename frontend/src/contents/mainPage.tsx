@@ -105,7 +105,7 @@ const MainPage = () => {
                     })}
                 </ul>
 
-                <p className="font-bold text-gray-900">{localizationData.predictionTitle}</p>
+                <p className="font-bold text-gray-900">{localizationData.predictionTitleMessage}</p>
                 <div className="my-4">
                     {Markdown(readyPrediction ?? undefined)}
                 </div>
