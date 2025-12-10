@@ -13,11 +13,12 @@ export interface MappedLocalization {
     mainFooterCompanyLinks: string[]
     mainFooterSupportText: string
     mainFooterSupportLinks: string[]
-    mainFooterSubscriptionLinks: string[]
+    mainFooterSubscriptionLinks: string
     mainFooterSubscriptionText: string
     mainFooterSubscriptionPlaceholder: string
     mainFooterSubscriptionButton: string
     mainFooterCopyright: string
+    mainFooterCopyrightCookies: string
 }
 
 export const localizationObj = {
@@ -66,8 +67,8 @@ export const localizationObj = {
         UA: ['Повідомити про проблему', 'Контакти']
     },
     mainFooterSubscriptionLinks: {
-        ENG: ['Subscription'],
-        UA: ['Підписка']
+        ENG: 'Subscription',
+        UA: 'Підписка'
     },
     mainFooterSubscriptionText: {
         ENG: "Stay up to date with the latest news and updates.",
@@ -87,6 +88,6 @@ export const localizationObj = {
     },
     mainFooterCopyrightCookies: {
         ENG: "Cookies",
-        UA: "Cookies (печінки)"
+        UA: "Cookies (печінки’)"
     }
 }

@@ -20,7 +20,8 @@ export const mapLocalization = (lang: Language): MappedLocalization => {
             mainFooterSubscriptionText: localizationObj.mainFooterSubscriptionText.ENG,
             mainFooterSubscriptionPlaceholder: localizationObj.mainFooterSubscriptionPlaceholder.ENG,
             mainFooterSubscriptionButton: localizationObj.mainFooterSubscriptionButton.ENG,
-            mainFooterCopyright: localizationObj.mainFooterCopyright.ENG
+            mainFooterCopyright: localizationObj.mainFooterCopyright.ENG,
+            mainFooterCopyrightCookies: localizationObj.mainFooterCopyrightCookies.ENG
         } 
     }else{
         return {
@@ -39,7 +40,8 @@ export const mapLocalization = (lang: Language): MappedLocalization => {
             mainFooterSubscriptionText: localizationObj.mainFooterSubscriptionText.UA,
             mainFooterSubscriptionPlaceholder: localizationObj.mainFooterSubscriptionPlaceholder.UA,
             mainFooterSubscriptionButton: localizationObj.mainFooterSubscriptionButton.UA,
-            mainFooterCopyright: localizationObj.mainFooterCopyright.UA
+            mainFooterCopyright: localizationObj.mainFooterCopyright.UA,
+            mainFooterCopyrightCookies: localizationObj.mainFooterCopyrightCookies.UA
         }
     }
 }

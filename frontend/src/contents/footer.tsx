@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { LocalizationContext } from '../localization/localizationWrapper';
+import { mapLocalization } from '../localization/localizationMapper';
+
 
 const Footer = () => {
+    let localization = useContext(LocalizationContext);
+    if(!localization) {
+        localization = [mapLocalization("ENG"), "ENG"]
+    }
+
+    const localizationData = localization[0];
+
     return (
         <footer className="bg-slate-50 border-t border-violet-100 pt-16 pb-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,7 +24,7 @@ const Footer = () => {
                             Taro
                         </h2>
                         <p className="text-gray-700 text-sm leading-relaxed">
-                            We help you become aware of your future. Join us on this journey of self-discovery and uncover the secrets that lie ahead.
+                            {localizationData.mainFooterText}
                         </p>
                         {/*переделать */}
                         <div className="flex space-x-4 pt-2">
@@ -31,9 +41,9 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-violet-700 font-semibold mb-4 uppercase tracking-wider text-sm">Company</h3>
+                        <h3 className="text-violet-700 font-semibold mb-4 uppercase tracking-wider text-sm">{localizationData.mainFooterCompanyText}</h3>
                         <ul className="space-y-3">
-                            {['About us'].map((link) => (
+                            {localizationData.mainFooterCompanyLinks.map((link) => (
                                 <li key={link}>
                                     <a href="#" className="text-gray-700 hover:text-violet-600 transition-colors duration-200">
                                         {link}
@@ -44,9 +54,9 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-violet-700 font-semibold mb-4 uppercase tracking-wider text-sm">Support</h3>
+                        <h3 className="text-violet-700 font-semibold mb-4 uppercase tracking-wider text-sm">{localizationData.mainFooterSupportText}</h3>
                         <ul className="space-y-3">
-                            {['Report a problem', 'Contacts'].map((link) => (
+                            {localizationData.mainFooterSupportLinks.map((link) => (
                                 <li key={link}>
                                     <a href="#" className="text-gray-700 hover:text-violet-600 transition-colors duration-200">
                                         {link}
@@ -57,19 +67,19 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-violet-700 font-semibold mb-4 uppercase tracking-wider text-sm">Subscription</h3>
-                        <p className="text-gray-700 text-sm mb-4">Stay up to date with the latest news and updates.</p>
+                        <h3 className="text-violet-700 font-semibold mb-4 uppercase tracking-wider text-sm">{localizationData.mainFooterSubscriptionLinks}</h3>
+                        <p className="text-gray-700 text-sm mb-4">{localizationData.mainFooterSubscriptionText}</p>
                         <form className="flex flex-col gap-3">
                             <input 
                                 type="email" 
-                                placeholder="Your email" 
+                                placeholder={localizationData.mainFooterSubscriptionPlaceholder}
                                 className="w-full px-4 py-2 rounded-lg bg-white border border-violet-100 focus:border-violet-500 focus:ring-2 focus:ring-violet-200 outline-none text-gray-700 placeholder-gray-400 transition-all"
                             />
                             <button 
                                 type="button"
                                 className="w-full px-4 py-2 rounded-lg bg-violet-600 text-white font-medium hover:bg-violet-700 active:bg-violet-800 transition-colors duration-300 shadow-md shadow-violet-200"
                             >
-                                Subscribe
+                                {localizationData.mainFooterSubscriptionButton}
                             </button>
                         </form>
                     </div>
@@ -77,10 +87,10 @@ const Footer = () => {
 
                 <div className="border-t border-violet-200 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-gray-700">
-                        &copy; {new Date().getFullYear()} Tarot. All rights reserved.
+                        &copy; {new Date().getFullYear()} {localizationData.mainFooterCopyright}
                     </p>
                     <div className="flex space-x-6 text-sm">
-                        <a href="#" className="text-gray-700 hover:text-violet-600 transition-colors">Cookies</a>
+                        <a href="#" className="text-gray-700 hover:text-violet-600 transition-colors">{localizationData.mainFooterCopyrightCookies}</a>
                     </div>
                 </div>
             </div>
