@@ -80,7 +80,7 @@ const MainPage = () => {
 
             <div onClick={() => makePrediction()}>
                 <button className="w-full bg-violet-600 hover:bg-violet-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-violet-200 active:scale-[0.98]">
-                    Reveal Destiny
+                    Make Prediction
                 </button>
             </div>
 
