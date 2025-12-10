@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { LanguageSwitcherStateContext, LocalizationContext } from './localizationWrapper';
+import { LanguageSwitcherStateContext, LocalizationContext } from '../localization/localizationWrapper';
 import Switcher from './switcher';
-import { mapLocalization } from './localization/localizationMapper';
+import { mapLocalization } from '../localization/localizationMapper';
 
 const NavbarComp = () => {
     const [ isOpen, setIsOpen ] = useState(false);

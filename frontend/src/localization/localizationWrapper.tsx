@@ -1,7 +1,7 @@
 import React, { useState, useEffect, type ReactNode, createContext } from "react";
 
-import { localization, type LocalizationOptions, type MappedLocalization } from "./localization/localization";
-import { mapLocalization } from "./localization/localizationMapper";
+import { localization, type LocalizationOptions, type MappedLocalization } from "./localization";
+import { mapLocalization } from "./localizationMapper";
 
 interface LocalizationProps {
     children: ReactNode;

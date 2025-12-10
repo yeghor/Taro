@@ -2,11 +2,11 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import "./index.css"
 
-import MainPage from './mainPage'
-import NavbarComp from './navBar';
-import Footer from './footer';
+import MainPage from './contents/mainPage'
+import NavbarComp from './contents/navBar';
+import Footer from './contents/footer';
 
-import LocalizationWrapper from './localizationWrapper';
+import LocalizationWrapper from './localization/localizationWrapper';
 
 // Wrap every component that contains content that can be localized in LocalizationWrapper
 
