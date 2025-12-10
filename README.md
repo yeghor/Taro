@@ -8,6 +8,8 @@ Tarot prediction web application.
 
 On the frontend user chooses prediction type and enters prompt. When user clicks submit button, backend receives request, chooses random tarot cards and making request to the AI API to generate prediction based on the type, user's prompt and tarot cards.
 
+Also, there is a great localization feature. That allows you with one click instantly translate every title to Ukraininan.
+
 ## Stack
 
 **Frontend** *(TypeScript)*:
