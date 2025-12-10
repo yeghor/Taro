@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { LocalizationContext, LanguageSwitcherState } from './localizationWrapper';
+import { LanguageSwitcherStateContext, LocalizationContext } from './localizationWrapper';
 import Switcher from './switcher';
-
 import { mapLocalization } from './localization/localizationMapper';
 
 const NavbarComp = () => {
     const [ isOpen, setIsOpen ] = useState(false);
     const [ scrolled, setScrolled ] = useState(false);
 
-    let localization = useContext(LocalizationContext)
+    const switchLocalizationState = useContext(LanguageSwitcherStateContext)
+    let localization = useContext(LocalizationContext);
 
-    if (!localization) {
-        localization = mapLocalization("ENG")
+    if(!localization) {
+        localization = [mapLocalization("ENG"), "ENG"]
     }
-
 
     useEffect(() => {
         const handleScroll = () => {
@@ -59,7 +58,7 @@ const NavbarComp = () => {
                                 </li>
                             ))}
                         </ul>
-                        <Switcher switchState={LanguageSwitcherState} />
+                        <Switcher switchState={switchLocalizationState} />
                     </nav>
 
                     <div className="md:hidden z-50" onClick={toggleMenu}>
@@ -85,7 +84,7 @@ const NavbarComp = () => {
                             </a>
                         </li>
                     ))}
-                        <Switcher switchState={LanguageSwitcherState} />
+                        <Switcher switchState={switchLocalizationState} />
                 </ul>
             </div>
         </header>

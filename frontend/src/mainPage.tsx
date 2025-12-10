@@ -7,9 +7,7 @@ import './index.css';
 import { type Card } from "./fetching/fetching";
 import Markdown from "./mardown";
 
-import {type MappedLocalization } from "./localization/localization";
-
-import { LocalizationContext, type LanguageStateSwitcherType } from "./localizationWrapper";
+import { LocalizationContext } from "./localizationWrapper";
 import { mapLocalization } from "./localization/localizationMapper";
 
 const MainPage = () => {
@@ -18,7 +16,7 @@ const MainPage = () => {
     let localization = useContext(LocalizationContext)
 
     if (!localization) {
-        localization = mapLocalization("ENG")
+        localization = [mapLocalization("ENG"), "ENG"]
     }
 
     const [ predType, setPredType ] = useState<PredictionTypes>("love");

@@ -9,8 +9,8 @@ interface LocalizationProps {
 
 export type LanguageStateSwitcherType = React.Dispatch<React.SetStateAction<LocalizationOptions>>;
 
-export const LocalizationContext = createContext<MappedLocalization | null>(null);
-export const LanguageSwitcherState = createContext<LanguageStateSwitcherType | null>(null);
+export const LocalizationContext = createContext<[MappedLocalization, LocalizationOptions] | null>(null);
+export const LanguageSwitcherStateContext = createContext<LanguageStateSwitcherType | null>(null);
 
 const LocalizationWrapper = (props: LocalizationProps) => {
     const [ localizationState, setLocalizationState ] = useState<LocalizationOptions>(localization);
@@ -21,10 +21,10 @@ const LocalizationWrapper = (props: LocalizationProps) => {
     }, [localizationState])
 
     return(
-        <LocalizationContext.Provider value={MappedLocalizationState}>
-            <LanguageSwitcherState.Provider value={setLocalizationState}>
+        <LocalizationContext.Provider value={[MappedLocalizationState, localizationState]}>
+            <LanguageSwitcherStateContext.Provider value={setLocalizationState}>
                 {props.children}
-            </LanguageSwitcherState.Provider>
+            </LanguageSwitcherStateContext.Provider>
         </LocalizationContext.Provider>
     );
 };
