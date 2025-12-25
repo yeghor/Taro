@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { LanguageSwitcherStateContext, LocalizationContext } from '../localization/localizationWrapper';
 import Switcher from './switcher';
 import { mapLocalization } from '../localization/localizationMapper';
+import { Link } from 'react-router-dom';
 
 const NavbarComp = () => {
     const [ isOpen, setIsOpen ] = useState(false);
@@ -15,8 +16,6 @@ const NavbarComp = () => {
     }
 
     const localizationData = localization[0];
-
-    console.log("localization from navbar - ", localizationData)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,23 +43,33 @@ const NavbarComp = () => {
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between gap-20 h-20">
-                    <a href="/" className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent cursor-pointer tracking-wide hover:opacity-80 transition-opacity">
+                    <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent cursor-pointer tracking-wide hover:opacity-80 transition-opacity">
                         Taro 
-                    </a>
+                    </Link>
 
                     <nav className="hidden md:flex items-center gap-8">
                         <ul className="flex items-center gap-6 list-none">
-                            {localizationData.mainNavbarTitle.map((item) => (
+                            {localizationData.mainNavbarTitle.map((item: string) => (
                                 <li key={item}>
-                                    <a 
-                                        href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`} 
+                                    <Link 
+                                        to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`} 
                                         className="text-gray-700 font-medium hover:text-purple-600 transition-colors duration-300 relative group"
                                     >
                                         {item}
                                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
+                            <li>
+                                <Link 
+                                    to="/new" 
+                                    className="text-gray-700 font-medium hover:text-purple-600 transition-colors duration-300 relative group"
+                                >
+                                    Github
+                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                                </Link>
+                            </li>
+
                         </ul>
                         <Switcher switchState={switchLocalizationState} />
                     </nav>
@@ -77,18 +86,28 @@ const NavbarComp = () => {
 
             <div className={`md:hidden fixed inset-0 w-full h-screen bg-white/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
                 <ul className="flex flex-col items-center gap-8 text-xl">
-                    {[localizationData.mainNavbarTitle].map((item) => (
+                    {localizationData.mainNavbarTitle.map((item: string) => (
                         <li key={item}>
-                            <a 
-                                href="#" 
+                            <Link 
+                                to={item === 'Home' || 'головна' ? '/' : `/${item.toLowerCase().replace(' ', '')}`} 
                                 onClick={() => setIsOpen(false)}
                                 className="text-gray-800 font-semibold hover:text-purple-600 transition-colors"
                             >
                                 {item}
-                            </a>
+                            </Link>
                         </li>
                     ))}
-                        <Switcher switchState={switchLocalizationState} />
+                     <li>
+                        <Link 
+                            to="/new" 
+                            onClick={() => setIsOpen(false)}
+                            className="text-gray-800 font-semibold hover:text-purple-600 transition-colors"
+                        >
+                            Github
+                        </Link>
+                    </li>
+
+                    <Switcher switchState={switchLocalizationState} />
                 </ul>
             </div>
         </header>
