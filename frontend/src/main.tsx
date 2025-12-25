@@ -9,6 +9,7 @@ import NavbarComp from './contents/navBar';
 import Footer from './contents/footer';
 
 import LocalizationWrapper from './localization/localizationWrapper';
+import AllCards from './contents/allCards';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/aboutUs" element={<AboutUs />} />
+                <Route path="/allCards" element={<AllCards />} />
             </Routes>
           </div>
 
