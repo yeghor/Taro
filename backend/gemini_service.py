@@ -23,7 +23,7 @@ Task:
   2. The dynamics, challenges, or influences.
   3. The most likely outcome if nothing changes.
   4. Practical advice the user can apply.
-- Use standard markdown style text, #, -, ****, __
+- Don't use markdown headers, only bold and italic
 - Give just a prediction, without greeting or something like: sure, here is your prediction
 
 Tone:

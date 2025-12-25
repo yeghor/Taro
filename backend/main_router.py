@@ -4,7 +4,7 @@ from main_service import MainService
 from typing import Literal
 
 from database.db_connect import get_sesstion_depends
-from pydantic_models import PredictionResponse
+from pydantic_models import PredictionResponse, CardsResponse
 
 main_router = APIRouter()
 
@@ -23,10 +23,16 @@ def predict(
     #     where the service's close() method is called in the finally block.
     # """
 
-    new_main_service = MainService(session=session, predict_type=tarot_type, prompt=prompt, lang=language)
+    main_service = MainService(session=session, predict_type=tarot_type, prompt=prompt, lang=language)
     try:
-        return new_main_service.predict()
+        return main_service.predict()
     finally:
         # error=False temporary
-        new_main_service.close(False)
-        
+        main_service.close(False)
+
+@main_router.get("/cards")
+def get_cards(
+    session: Session = Depends(get_sesstion_depends)
+) -> CardsResponse:
+    main_service = MainService(session=session, predict_type=None, prompt=None, lang=None)
+    return CardsResponse(cards=main_service.get_cards())
