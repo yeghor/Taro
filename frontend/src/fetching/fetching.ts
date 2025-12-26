@@ -16,7 +16,7 @@ export interface Card {
 
 export interface FullCard {
     name: string;
-    desription: string;
+    description: string;
     flipped_description: string;
     image_name: string;
 }
