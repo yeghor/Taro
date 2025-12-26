@@ -85,7 +85,7 @@ const MainPage = () => {
 
             <div onClick={() => makePrediction()}>
                 <button className="w-full bg-violet-600 hover:bg-violet-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-violet-200 active:scale-[0.98]">
-                    {}{localizationData.predictionButtonTitle}
+                    {localizationData.predictionButtonTitle}
                 </button>
             </div>
 
@@ -104,7 +104,7 @@ const MainPage = () => {
                     })}
                 </ul>
 
-                <p className="font-bold text-gray-900">{localizationData.predictionTitleMessage}</p>
+                <p className="font-bold text-gray-900">{readyPrediction ? localizationData.predictionTitleMessage : null}</p>
                 <div className="my-4">
                     {Markdown(readyPrediction ?? undefined)}
                 </div>
