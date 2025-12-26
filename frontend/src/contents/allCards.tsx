@@ -14,13 +14,13 @@ const AllCards = () => {
     }, [])
 
     return(
-        <ul className="columns-3 mx-8 my-4">
+        <div className="columns-3 mx-8 my-4">
             {cards.map((card) => {
                 return (
                     <FullCardComp card={card} />
                 )
             })}
-        </ul>
+        </div>
     )
 };
 

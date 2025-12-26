@@ -5,7 +5,7 @@ import { MEDIA_URL as mediaURLMaker } from "../fetching/fetching";
 
 const FullCardComp = ({ card }: { card: FullCard }) => {
     return (
-        <div className="max-w-md mx-auto my-6 rounded-2xl border border-violet-200 bg-white shadow-md hover:shadow-xl transition-shadow">
+        <div className="mx-auto my-6 rounded-2xl border border-violet-200 bg-white shadow-md hover:shadow-xl transition-shadow">
             <div className="overflow-hidden rounded-t-2xl">
                 <img
                     src={mediaURLMaker(card.image_name)}
