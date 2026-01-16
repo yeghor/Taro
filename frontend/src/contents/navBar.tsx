@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { LanguageSwitcherStateContext, LocalizationContext } from '../localization/localizationWrapper';
-import Switcher from './switcher';
+import Switcher from './localizationSwitcher';
+import ThemeSwitcher from './themeSwitcher'; 
 import { mapLocalization } from '../localization/localizationMapper';
+import { Link } from 'react-router-dom';
 
 const NavbarComp = () => {
     const [ isOpen, setIsOpen ] = useState(false);
@@ -34,60 +36,88 @@ const NavbarComp = () => {
 
     return (
         <header 
-            className={`fixed w-full top-0 z-50 transition-all duration-300 flex items-center gap-4 ${
+            className={`fixed w-full top-0 z-50 transition-all duration-300 ${
                 scrolled || isOpen 
-                ? 'bg-white/80 backdrop-blur-md shadow-md border-b border-white/20' 
+                ? 'bg-white/80 dark:bg-[#0a0a1a]/90 backdrop-blur-md shadow-lg border-b border-white/20 dark:border-purple-900/30 dark:shadow-purple-900/10' 
                 : 'bg-transparent'
             }`}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between gap-20 h-20">
-                    <a href="/" className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent cursor-pointer tracking-wide hover:opacity-80 transition-opacity">
-                        Taro 
-                    </a>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative">
+                <div className="flex items-center justify-between h-20">
+                    
+                    <div className="flex items-center gap-3 z-10">
+                        <ThemeSwitcher />
+                        
+                        <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent cursor-pointer tracking-wide hover:opacity-80 transition-opacity">
+                            Taro 
+                        </Link>
+                    </div>
 
-                    <nav className="hidden md:flex items-center gap-8">
-                        <ul className="flex items-center gap-6 list-none">
+                    <nav className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <ul className="flex items-center gap-8 list-none">
                             {localizationData.mainNavbarTitle.map((item) => (
                                 <li key={item}>
-                                    <a 
-                                        href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`} 
-                                        className="text-gray-700 font-medium hover:text-purple-600 transition-colors duration-300 relative group"
+                                    <Link 
+                                        to={
+                                            item === 'Home' || item === 'головна' ? '/' : 
+                                            item === 'All Cards' || item === 'Всі карти' ? '/allCards' : 
+                                            item === 'About us' || item === 'Про нас' ? '/aboutUs' : 
+                                            item === 'GitHub' ? 'https://github.com/yeghor/Tarot' : '/'
+                                        }
+                                        onClick={() => setIsOpen(false)}
+                                        className="text-gray-800 dark:text-gray-100 font-semibold hover:text-purple-600 dark:hover:text-purple-400 transition-colors tracking-wide"
                                     >
                                         {item}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
-                        <Switcher switchState={switchLocalizationState} />
                     </nav>
 
-                    <div className="md:hidden z-50" onClick={toggleMenu}>
-                        <div className="w-6 h-6 flex flex-col justify-between cursor-pointer group">
-                            <span className={`h-0.5 w-full bg-gray-800 rounded-lg transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2.5 bg-red-500' : ''}`}></span>
-                            <span className={`h-0.5 w-full bg-gray-800 rounded-lg transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
-                            <span className={`h-0.5 w-full bg-gray-800 rounded-lg transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-3 bg-red-500' : ''}`}></span>
+                    <div className="flex items-center gap-4 z-10">
+                        <div className="hidden md:block">
+                             <Switcher switchState={switchLocalizationState} />
+                        </div>
+                        
+                        <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
+                            <div className="w-6 h-6 flex flex-col justify-between group">
+                                <span className={`h-0.5 w-full bg-gray-800 dark:bg-white rounded-lg transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2.5 bg-purple-600 dark:bg-purple-500' : ''}`}></span>
+                                <span className={`h-0.5 w-full bg-gray-800 dark:bg-white rounded-lg transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
+                                <span className={`h-0.5 w-full bg-gray-800 dark:bg-white rounded-lg transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-3 bg-purple-600 dark:bg-purple-500' : ''}`}></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`md:hidden absolute top-20 left-0 w-full 
+                        bg-white dark:bg-[#0a0a1a] 
+                        shadow-lg dark:shadow-purple-900/20 
+                        border-t border-transparent dark:border-purple-900/30 
+                        flex flex-col items-center gap-6 py-8 transition-all duration-300 ease-in-out 
+                        ${isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-10 invisible pointer-events-none'}`}
+                    >
+                        <ul className="flex flex-col items-center gap-6 list-none w-full">
+                            {localizationData.mainNavbarTitle.map((item) => (
+                                <li key={item}>
+                                    <Link 
+                                        to={
+                                            item === 'Home' || item === 'головна' ? '/' : 
+                                            item === 'All Cards' || item === 'Всі карти' ? '/allCards' : 
+                                            item === 'About us' || item === 'Про нас' ? '/aboutUs' : 
+                                            item === 'GitHub' ? 'https://github.com/yeghor/Tarot' : '/'
+                                        }
+                                        onClick={() => setIsOpen(false)}
+                                        className="text-xl text-gray-800 dark:text-gray-100 font-semibold hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                                    >
+                                        {item}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="scale-110">
+                            <Switcher switchState={switchLocalizationState} />
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className={`md:hidden fixed inset-0 w-full h-screen bg-white/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
-                <ul className="flex flex-col items-center gap-8 text-xl">
-                    {[localizationData.mainNavbarTitle].map((item, index) => (
-                        <li key={index}>
-                            <a 
-                                href="#" 
-                                onClick={() => setIsOpen(false)}
-                                className="text-gray-800 font-semibold hover:text-purple-600 transition-colors"
-                            >
-                                {item}
-                            </a>
-                        </li>
-                    ))}
-                        <Switcher switchState={switchLocalizationState} />
-                </ul>
             </div>
         </header>
     );

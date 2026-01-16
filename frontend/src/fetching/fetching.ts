@@ -14,14 +14,40 @@ export interface Card {
     flipped: boolean;
 }
 
+export interface FullCard {
+    name: string;
+    description: string;
+    flipped_description: string;
+    image_name: string;
+}
+
 export interface PredictResponse {
     prediction: string;
     cards: Card[];
 }
 
+export interface AllCardsResponse {
+    cards: FullCard[];
+}
+
 export const fetchPredict = async (predictType: PredictionTypes, prompt: string, language: LocalizationOptions): Promise<PredictResponse | null> => {
     try {
         const URL = `${BASE_URL}/predict/${predictType}/${language}/?prompt=${prompt}`;
+        const response = await fetch(URL);
+
+        if (response.ok) {
+            return response.json()
+        }
+    } catch (err) {
+        console.error(err)
+        window.alert("Error while fetchin to API");
+    }
+    return null;
+};
+
+export const fetchAllCards = async (): Promise<AllCardsResponse | null> => {
+    try {
+        const URL = `${BASE_URL}/cards`;
         const response = await fetch(URL);
 
         if (response.ok) {
