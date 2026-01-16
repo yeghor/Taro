@@ -16,8 +16,6 @@ const NavbarComp = () => {
 
     const localizationData = localization[0];
 
-    console.log("localization from navbar - ", localizationData)
-
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 20) {
@@ -77,8 +75,8 @@ const NavbarComp = () => {
 
             <div className={`md:hidden fixed inset-0 w-full h-screen bg-white/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
                 <ul className="flex flex-col items-center gap-8 text-xl">
-                    {[localizationData.mainNavbarTitle].map((item) => (
-                        <li key={item}>
+                    {[localizationData.mainNavbarTitle].map((item, index) => (
+                        <li key={index}>
                             <a 
                                 href="#" 
                                 onClick={() => setIsOpen(false)}
